@@ -8,10 +8,12 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 6000);
-  }, [loading]);
+    if (loading && link) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    }
+  }, [loading, link]);
   // eslint-disable-next-line react/no-unstable-nested-components
   const Camera = () => {
     return (
@@ -28,7 +30,7 @@ const App = () => {
   const CardMother = () => {
     return (
       <>
-        {loading ? (
+        {loading && link ? (
           <View
             // eslint-disable-next-line react-native/no-inline-styles
             style={{
@@ -36,7 +38,7 @@ const App = () => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <ActivityIndicator size={70} color={'#FBB030'} />
+            <ActivityIndicator size={40} color={'#FBB030'} />
           </View>
         ) : (
           <Image
